@@ -1,37 +1,44 @@
 package managerpackage;
-//setup inport statements
+//setup import statements
 
-import java.util.Map;
 import java.util.LinkedHashMap;
+import java.util.Map;
+import resourcepackage.Resource1;
 
-//import resource entity
-import resourcepackage.Resource;
 
+public class ResourceManager1 {
 
-public class ResourceManager {
-
-    private Map<String, Resource> resourceMap;
+    private Map<String, Resource1> resourceMap;
 
     //default constructor
-    public ResourceManager() {
+    public ResourceManager1() {
+        //hardcoded resources for testing purposes
         resourceMap = new LinkedHashMap<>();
-        addResource(new Resource("CPU0",         Resource.TYPE_CPU));
-        addResource(new Resource("RAM_Block1",   Resource.TYPE_MEMORY));
-        addResource(new Resource("FileA.txt",    Resource.TYPE_FILE));
-        addResource(new Resource("FileB.txt",    Resource.TYPE_FILE));
-        addResource(new Resource("Registry",     Resource.TYPE_PROTECTED));
-        addResource(new Resource("KernelConfig", Resource.TYPE_PROTECTED));
+        // addResourceToMap(new Resource1("CPU0",         Resource1.TYPE_CPU));
+        // addResourceToMap(new Resource1("RAM_Block1",   Resource1.TYPE_MEMORY));
+        // addResourceToMap(new Resource1("FileA.txt",    Resource1.TYPE_FILE));
+        // addResourceToMap(new Resource1("FileB.txt",    Resource1.TYPE_FILE));
+        // addResourceToMap(new Resource1("Registry",     Resource1.TYPE_PROTECTED));
+        // addResourceToMap(new Resource1("KernelConfig", Resource1.TYPE_PROTECTED));
     }
 
     //accessors and mutators
+    public Map<String, Resource1> getResourceMap() {
+        return resourceMap;
+    }
 
     //adds a resource to the resource map
-    public void addResource(Resource r) {
+    public void addResourceToMap(Resource1 r) {
+        if (r==null || resourceMap.containsKey(r.getName())) {
+            throw new IllegalArgumentException("Resource cannot be null");
+        } 
         resourceMap.put(r.getName(), r);
     }
-    public Resource getResource(Resource r) {
-        return resourceMap.get(r.getName());
-        
+    // public Resource getResource(Resource r) {
+    //     return resourceMap.get(r.getName());
+    // }
+    public Resource1 getResource(String name) {
+    return resourceMap.get(name);
     }
 
 }

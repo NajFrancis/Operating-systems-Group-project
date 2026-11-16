@@ -1,6 +1,6 @@
-package resourcepackage;
+package originaltest;
 
-public class Resource1 {
+public class Resource {
     // Type names shared with the permission system
     public static final String TYPE_CPU = "CPU";
     public static final String TYPE_MEMORY = "Memory";
@@ -12,19 +12,20 @@ public class Resource1 {
     private boolean inUse;
 
     //Default constructor 
-    public Resource1() {
+    public Resource() {
         name = "Default Resource";
         type = "Default Type";
         inUse = false;
     }
     //primary constructor 
-    public Resource1(String name, String type) {
+    public Resource(String name, String type) {
         this.name = name;
         this.type = type;
-        this.inUse = false;
+        this.inUse = inUse;
+        
     }
     //copy constructor 
-    public Resource1(Resource1 r){
+    public Resource(Resource r){
         this.name = r.name;
         this.type = r.type;
         this.inUse = r.inUse;

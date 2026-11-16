@@ -1,6 +1,6 @@
 package resourcepackage;
 
-public class Resource {
+public class Resource1 {
     // Type names shared with the permission system
     public static final String TYPE_CPU = "CPU";
     public static final String TYPE_MEMORY = "Memory";
@@ -12,20 +12,19 @@ public class Resource {
     private boolean inUse;
 
     //Default constructor 
-    public Resource() {
+    public Resource1() {
         name = "Default Resource";
         type = "Default Type";
         inUse = false;
     }
     //primary constructor 
-    public Resource(String name, String type) {
+    public Resource1(String name, String type) {
         this.name = name;
         this.type = type;
-        this.inUse = inUse;
-        
+        this.inUse = false;
     }
     //copy constructor 
-    public Resource(Resource r){
+    public Resource1(Resource1 r){
         this.name = r.name;
         this.type = r.type;
         this.inUse = r.inUse;
@@ -34,21 +33,22 @@ public class Resource {
     public String getName() {
         return name;
     }
-    public void setName(String name) {
-        this.name = name;
-    }
+    //commented out because of security risk, REMOVING LATER (breaks the map, if a name is changed, 
+    // the map will not be able to find the resource)
+    // public void setName(String name) {
+    //     this.name = name;
+    // }
     public String getType() {
         return type;
     }
-    public void setType(String type) {
-        this.type = type;
-    }
-    public boolean getInUse() {
-        return inUse;
-    }
-    public void setInUse(boolean inUse) {
-        this.inUse = inUse;
-    }
+    //commented out because of security risk, REMOVING LATER
+    // public void setType(String type) {
+    //     this.type = type;
+    // }
+    // public boolean getInUse() {
+    //     return inUse;
+    // }
+
     //Allocate Resource 
     public boolean allocate(){
         if(inUse){
@@ -60,13 +60,6 @@ public class Resource {
     //Release Resource Method
     public void release(){
         inUse = false; //release resource
-    }
-    //display method
-    public void displayData() {
-        System.out.println();
-        System.out.println("Resource Name: " + name);
-        System.out.println("Resource Type: " + type);
-        System.out.println("status: " + inUse);
     }
     //custom Display method
     public void display(){
