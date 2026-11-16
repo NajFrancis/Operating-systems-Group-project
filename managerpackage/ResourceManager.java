@@ -3,15 +3,15 @@ package managerpackage;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import resourcepackage.Resource1;
+import resourcepackage.Resource;
 
 
-public class ResourceManager1 {
+public class ResourceManager {
 
-    private Map<String, Resource1> resourceMap;
+    private Map<String, Resource> resourceMap;
 
     //default constructor
-    public ResourceManager1() {
+    public ResourceManager() {
         //hardcoded resources for testing purposes
         resourceMap = new LinkedHashMap<>();
         // addResourceToMap(new Resource1("CPU0",         Resource1.TYPE_CPU));
@@ -23,12 +23,12 @@ public class ResourceManager1 {
     }
 
     //accessors and mutators
-    public Map<String, Resource1> getResourceMap() {
+    public Map<String, Resource> getResourceMap() {
         return resourceMap;
     }
 
     //adds a resource to the resource map
-    public void addResourceToMap(Resource1 r) {
+    public void addResourceToMap(Resource r) {
         if (r==null || resourceMap.containsKey(r.getName())) {
             throw new IllegalArgumentException("Resource cannot be null");
         } 
@@ -37,8 +37,8 @@ public class ResourceManager1 {
     // public Resource getResource(Resource r) {
     //     return resourceMap.get(r.getName());
     // }
-    public Resource1 getResource(String name) {
-    return resourceMap.get(name);
+    public Resource getResource(String name) {
+        return resourceMap.get(name);
     }
 
 }
