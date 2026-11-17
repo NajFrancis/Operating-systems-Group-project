@@ -1,4 +1,4 @@
-package originaltest;
+package draft;
 
 public class Resource {
     // Type names shared with the permission system

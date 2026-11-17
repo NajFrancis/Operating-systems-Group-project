@@ -1,0 +1,163 @@
+# Operating Systems Group Project
+
+## Overview
+
+This Java project models system resources and provides a manager for looking them up by name. The active source consists of `app.java`, `managerpackage.ResourceManager`, and `resourcepackage.Resource`. Files in the `draft` folder are not part of this documentation.
+
+Resource names are case-sensitive and must match exactly.
+
+## Classes
+
+### `app`
+
+The application entry point. Its `main` method creates a resource manager and looks up the resource named `CPU0`.
+
+#### `main(String[] args)`
+
+- **Access:** `public static`
+- **Parameter:** `args` — command-line arguments; currently unused.
+- **Returns:** `void`
+- **Purpose:** Creates a `ResourceManager`, calls `getResource("CPU0")`, and stores the result in a local `Resource` variable. The lookup method prints whether the resource was found and displays its details when found.
+- **How to call:** Run the `app` class; the Java runtime invokes `main` automatically. It can also be called directly as `app.main(args)` from Java code.
+
+### `managerpackage.ResourceManager`
+
+Stores resources in a map keyed by each resource's name. Its constructor loads six sample resources.
+
+#### `ResourceManager()`
+
+- **Access:** `public`
+- **Parameters:** None
+- **Purpose:** Creates the resource map and adds `CPU0`, `RAM_Block1`, `FileA.txt`, `FileB.txt`, `Registry`, and `KernelConfig`.
+- **How to call:** `ResourceManager manager = new ResourceManager();`
+
+#### `getResourceMap()`
+
+- **Access:** `public`
+- **Parameters:** None
+- **Returns:** `Map<String, Resource>` — the manager's map, keyed by resource name.
+- **Purpose:** Provides access to the map of resources.
+- **How to call:** `Map<String, Resource> resources = manager.getResourceMap();`
+- **Note:** This returns the underlying map, not a copy, so changes made through it affect the manager.
+
+#### `getResource(String name)`
+
+- **Access:** `public`
+- **Parameter:** `name` — the exact, case-sensitive resource name to find.
+- **Returns:** `Resource` if found, otherwise `null`.
+- **Purpose:** Looks up a resource by name. It prints a not-found message when the name is absent. When found, it prints a found message and calls `display()` on that resource.
+- **How to call:** `Resource cpu = manager.getResource("CPU0");`
+- **Note:** The method both prints information and returns the resource. Check for `null` before using the returned value.
+
+#### `addResourceToMap(Resource r)`
+
+- **Access:** `private`
+- **Parameter:** `r` — the resource to add.
+- **Returns:** `void`
+- **Purpose:** Adds a resource to the map using its name as the key. It is called by the constructor and cannot be called directly by code outside `ResourceManager`.
+- **Error behavior:** Throws `IllegalArgumentException` when `r` is `null` or its name is already present. The current null-or-duplicate check uses the message `"Resource cannot be null"` for either condition.
+
+### `resourcepackage.Resource`
+
+Represents one resource, with a name, type, and in-use status. A new resource starts as not in use.
+
+#### `Resource()`
+
+- **Access:** `public`
+- **Parameters:** None
+- **Purpose:** Creates a resource with the name `"Default Resource"`, type `"Default Type"`, and `inUse == false`.
+- **How to call:** `Resource resource = new Resource();`
+
+#### `Resource(String name, String type)`
+
+- **Access:** `public`
+- **Parameters:** `name` — resource name; `type` — resource type.
+- **Purpose:** Creates a resource with the supplied name and type, initially not in use.
+- **How to call:** `Resource cpu = new Resource("CPU0", Resource.TYPE_CPU);`
+- **Note:** The constructor does not validate its arguments.
+
+#### `getName()`
+
+- **Access:** `public`
+- **Parameters:** None
+- **Returns:** `String` — the resource name.
+- **Purpose:** Reads the resource's name.
+- **How to call:** `String name = resource.getName();`
+
+#### `getType()`
+
+- **Access:** `public`
+- **Parameters:** None
+- **Returns:** `String` — the resource type.
+- **Purpose:** Reads the resource's type.
+- **How to call:** `String type = resource.getType();`
+
+#### `getInUse()`
+
+- **Access:** `public`
+- **Parameters:** None
+- **Returns:** `boolean` — `true` if the resource is allocated; otherwise `false`.
+- **Purpose:** Reads the resource's current allocation status.
+- **How to call:** `boolean busy = resource.getInUse();`
+
+#### `allocate()`
+
+- **Access:** `public`
+- **Parameters:** None
+- **Returns:** `boolean` — `true` if this call allocated the resource; `false` if it was already in use.
+- **Purpose:** Marks an available resource as in use. Calling it on a resource already in use leaves it in use and reports failure.
+- **How to call:** `if (resource.allocate()) { /* allocation succeeded */ }`
+
+#### `release()`
+
+- **Access:** `public`
+- **Parameters:** None
+- **Returns:** `void`
+- **Purpose:** Marks the resource as available by setting its in-use status to `false`.
+- **How to call:** `resource.release();`
+
+#### `display()`
+
+- **Access:** `public`
+- **Parameters:** None
+- **Returns:** `void`
+- **Purpose:** Prints the resource name, type, availability status, and a separator line to standard output.
+- **How to call:** `resource.display();`
+
+## Resource type constants
+
+`Resource` defines these public constants for use as resource types:
+
+| Constant | Value |
+| --- | --- |
+| `Resource.TYPE_CPU` | `"CPU"` |
+| `Resource.TYPE_MEMORY` | `"Memory"` |
+| `Resource.TYPE_FILE` | `"File"` |
+| `Resource.TYPE_PROTECTED` | `"Protected"` |
+
+Example: `new Resource("CPU0", Resource.TYPE_CPU)`.
+
+## How the methods are called
+
+When the program starts, `app.main` constructs a `ResourceManager`. The manager constructor creates the map and calls its private `addResourceToMap` method once for each sample resource. Then `app.main` calls `getResource("CPU0")`. If the resource exists, `getResource` calls `Resource.getName()` to print its name and calls `Resource.display()` to print its details. If it does not exist, `getResource` prints a not-found message and returns `null`.
+
+Other `Resource` methods are available to callers after obtaining or constructing a resource. For example:
+
+```java
+Resource cpu = manager.getResource("CPU0");
+if (cpu != null) {
+    boolean allocated = cpu.allocate();
+    System.out.println("Allocated: " + allocated);
+    System.out.println("In use: " + cpu.getInUse());
+    cpu.release();
+}
+```
+
+## Compile and run
+
+From the project directory, compile the active Java files and run the application:
+
+```text
+javac -d out app.java managerpackage\ResourceManager.java resourcepackage\Resource.java
+java -cp out app
+```
