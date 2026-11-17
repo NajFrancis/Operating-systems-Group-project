@@ -43,7 +43,7 @@ public class ResourceManager {
     // public Resource getResource(Resource r) {
     //     return resourceMap.get(r.getName());
     // }
-    
+
     public Resource getResource(String name) {
         Resource resource = resourceMap.get(name);
         if (resource == null) {
@@ -54,5 +54,21 @@ public class ResourceManager {
             resource.display();
         }
         return resourceMap.get(name);
+    }
+
+    // public void displayResources() {
+    //     System.out.println("\nResource Manager: Displaying all resources in the resource map");
+    //     for (Resource r : resourceMap.values()) {
+    //         r.display();
+    //     }
+    // }
+    public void display() {
+        System.out.printf("%-14s %-10s %s%n", "Name", "Type", "Status");
+        System.out.println("-----------------------------------");
+        for (Map.Entry<String, Resource> entry : resourceMap.entrySet()) {
+            Resource r = entry.getValue();
+            System.out.printf("%-14s %-10s %s%n",
+                    entry.getKey(), r.getType(), r.isAvailable() ? "In Use" : "Available");
+        }
     }
 }
