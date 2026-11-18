@@ -6,13 +6,14 @@ public class App {
         ResourceManager manager = new ResourceManager();
         //displays the whole resource list
         manager.display();
-        //allocates a resouse 
-        manager.getResource("Registry").allocate();
-        //checks if resource is available
+        //allocates a resource
+        manager.allocate("Registry");
         manager.isAvailable("Registry");
-        //releases a resource from use
-        manager.getResource("Registry").release();
-        //displays entire hashmap/resource list
+        //checks if resource is available
+        // manager.isAvailable("Registry");
+        // //releases a resource from use
+        // manager.release("Registry");
+        // //displays entire hashmap/resource list
         manager.display();
 
 

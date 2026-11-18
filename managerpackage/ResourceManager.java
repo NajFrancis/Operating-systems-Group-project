@@ -65,28 +65,24 @@ public class ResourceManager {
     public boolean allocate(String name) {
         Resource resource = resourceMap.get(name);
         if (resource == null) {
-            //debug message to show that the resource does not exist
-            System.out.println("\nThere is no such resource within system: " + name);
+            if (DEBUG) {
+                System.out.println("\nThere is no such resource within system: " + name);
+            }
             return false;
         }
         return resource.allocate();
     }
 
-    //manager method to release a resource by name
-    public void release(String name) {
+    //Returns true only when an allocated resource was successfully released.
+    public boolean release(String name) {
         Resource resource = resourceMap.get(name);
-        if (resource != null) {
-            resource.release();
-            if (DEBUG){
-                System.out.println("Resource " + name +" has been released");
-            }
-        }
-        else {
-            //debug message to show that the resource does not exist
-            if (DEBUG){
+        if (resource == null) {
+            if (DEBUG) {
                 System.out.println("\nThere is no such resource within system: " + name);
             }
+            return false;
         }
+        return resource.release();
     }
     public boolean isAvailable(String name) {
         //looks up the resource by name

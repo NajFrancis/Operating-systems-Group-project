@@ -58,15 +58,19 @@ public class Resource {
         return true;
     }
 
-    //This makes the resource available to be used 
-    public void release(){
-        inUse = false; //release resource
-        //debug message to show that the resource has been released
-        if (inUse){
-            if (DEBUG){
-                System.out.println("\nResource " + name + " has been released and is now available");
+    //Returns true only when an allocated resource was successfully released.
+    public boolean release(){
+        if (!inUse) {
+            if (DEBUG) {
+                System.out.println("\nResource " + name + " is not in use, cannot release");
             }
+            return false;
         }
+        inUse = false;
+        if (DEBUG) {
+            System.out.println("\nResource " + name + " has been released and is now available");
+        }
+        return true;
     }
     //custom Display method
     public void display(){
