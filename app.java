@@ -8,12 +8,14 @@ public class App {
         manager.display();
         //allocates a resouse 
         manager.getResource("Registry").allocate();
-        // manager.getResource("Registry").release();
-        manager.display();
+        //checks if resource is available
         manager.isAvailable("Registry");
+        //releases a resource from use
+        manager.getResource("Registry").release();
+        //displays entire hashmap/resource list
+        manager.display();
 
 
 
     } 
-
 }

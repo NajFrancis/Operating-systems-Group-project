@@ -9,7 +9,7 @@ import resourcepackage.Resource;
 
 public class ResourceManager {
     private static final boolean DEBUG = true; //true to show debug false to hide them
-    private Map<String, Resource> resourceMap;
+    private final Map<String, Resource> resourceMap;
 
     //default constructor
     public ResourceManager() {
@@ -89,19 +89,21 @@ public class ResourceManager {
         }
     }
     public boolean isAvailable(String name) {
-        //create resource object and checking the map for name passed to the function
+        //looks up the resource by name
         Resource resource = resourceMap.get(name);
         if (resource == null) {
             if (DEBUG) {
-                System.out.println("\nThere is no such resource within system: " + name);
+                System.out.println("There is no such resource within system: " + name);
             }
+            //not found or in use
             return false;
         }
 
         boolean available = resource.isAvailable();
         if (DEBUG) {
-            System.out.println("\nResource " + name + " is " + (available ? "available" : "in use"));
+            System.out.println("Resource " + name + " is " + (available ? "available" : "in use"));
         }
+
         return available;
     }
 

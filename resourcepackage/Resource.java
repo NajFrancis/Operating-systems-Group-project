@@ -2,7 +2,7 @@ package resourcepackage;
 
 
 public class Resource {
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = true;//true to show debug false to hide them
 
     // Type names shared with the permission system
     public static final String TYPE_CPU = "CPU";
