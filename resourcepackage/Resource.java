@@ -1,6 +1,9 @@
 package resourcepackage;
 
+
 public class Resource {
+    private static final boolean DEBUG = true;
+
     // Type names shared with the permission system
     public static final String TYPE_CPU = "CPU";
     public static final String TYPE_MEMORY = "Memory";
@@ -41,14 +44,17 @@ public class Resource {
         if (!isAvailable()) {
 
             //resource is already in use, cannot allocate
-            //debug message to show that the resource is already in use
+            if (DEBUG){
             System.out.println("\nResource " + name + " is already in use, cannot allocate");
+                }
             return false;
         }
         //resource is not in use, can allocate
         inUse = true;
         //debug message to show that the resource has been allocated
-        System.out.println("\nResource " + name + " has been allocated and is now in use");
+        if (DEBUG){
+            System.out.println("\nResource " + name + " has been allocated and is now in use");
+        }
         return true;
     }
 
@@ -56,9 +62,12 @@ public class Resource {
     public void release(){
         inUse = false; //release resource
         //debug message to show that the resource has been released
-        System.out.println("\nResource " + name + " has been released and is now available");
+        if (inUse){
+            if (DEBUG){
+                System.out.println("\nResource " + name + " has been released and is now available");
+            }
+        }
     }
-    
     //custom Display method
     public void display(){
         System.out.println("resource name: " + name);
