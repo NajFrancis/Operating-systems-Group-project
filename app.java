@@ -1,10 +1,5 @@
 import managerpackage.ResourceManager;
 
-//change this to false so functions stop sending outputs
-
-
-
-
 public class App {
     public static void main(String[] args) {
         //create a new resource manager object
