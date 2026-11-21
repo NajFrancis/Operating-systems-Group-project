@@ -1,3 +1,6 @@
+//Najaun Francis - 2304842
+//resource creation and allocation 
+
 package managerpackage;
 //setup import statements
 
@@ -29,7 +32,7 @@ public class ResourceManager {
     //returns the resource map
     public Map<String, Resource> getResourceMap() {
         // return resourceMap;
-        //returns the resource map (SECURITY RISK) so instead,
+        //returns the resource map which is a security risk so instead,
         // return an unmodifiable view of the resource map to prevent external modification
         return Collections.unmodifiableMap(resourceMap);
     }

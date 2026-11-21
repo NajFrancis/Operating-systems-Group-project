@@ -2,7 +2,10 @@
 
 ## Overview
 
-This Java project models system resources and provides a manager for looking them up by name. The active source consists of `app.java`, `managerpackage.ResourceManager`, and `resourcepackage.Resource`. Files in the `draft` folder are not part of this documentation.
+This Java project models system resources and provides a manager for looking them up by name. The active source consists of `member3.App`, `member3.User`,
+`member3.PermissionManager`, `member3.AccessController`,
+`managerpackage.ResourceManager`, and `resourcepackage.Resource`.
+Files in the `draft` folder are not part of this documentation.
 
 Resource names are case-sensitive and must match exactly.
 
@@ -158,6 +161,6 @@ if (cpu != null) {
 From the project directory, compile the active Java files and run the application:
 
 ```text
-javac -d out app.java managerpackage\ResourceManager.java resourcepackage\Resource.java
-java -cp out app
+javac -d out App.java member3\*.java managerpackage\ResourceManager.java resourcepackage\Resource.java
+java -cp out member3.App
 ```

@@ -1,10 +1,12 @@
+//Najaun Francis - 2304842
+//resource creation and allocation 
 package resourcepackage;
 
 
 public class Resource {
     private static final boolean DEBUG = true;//true to show debug false to hide them
 
-    // Type names shared with the permission system
+    // Constants shared with the permission system
     public static final String TYPE_CPU = "CPU";
     public static final String TYPE_MEMORY = "Memory";
     public static final String TYPE_FILE = "File";
