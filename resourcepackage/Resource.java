@@ -81,6 +81,4 @@ public class Resource {
         System.out.println("status: " + (inUse ? "In Use" : "Available"));
         System.out.println("-----------------------------");
     }
-
-
 }
