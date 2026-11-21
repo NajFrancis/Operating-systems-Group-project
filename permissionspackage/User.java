@@ -1,5 +1,5 @@
 /*Amoya Collins 2408831*/
-package member3;
+package permissionspackage;
 
 public class User {
 	private String username;

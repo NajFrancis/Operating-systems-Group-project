@@ -1,6 +1,6 @@
 /*Amoya Collins 2408831*/
 
-package member3;
+package permissionspackage;
 
 import resourcepackage.Resource;
 
